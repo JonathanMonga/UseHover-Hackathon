@@ -275,12 +275,6 @@ class ExpenseEditActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 0)
-            if (resultCode == Activity.RESULT_OK)
-                viewModel.onSave(getCurrentAmount(), description_edittext.text.toString())
-            else
-                Toast.makeText(applicationContext, "Action cancel.", Toast.LENGTH_LONG).show()
-        else
-            if (resultCode == Activity.RESULT_OK)
-                Toast.makeText(applicationContext, "Good choice!", Toast.LENGTH_LONG).show()
+            viewModel.onSave(getCurrentAmount(), description_edittext.text.toString())
     }
 }

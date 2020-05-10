@@ -37,7 +37,7 @@
 
         <Preference
             app:key="@string/setting_category_app_version_key"
-            app:summary="@string/setting_category_app_version_message"/>
+            app:summary="Made by Jonathan MONGA"/>
     </PreferenceCategory>
 
     <!--<PreferenceCategory

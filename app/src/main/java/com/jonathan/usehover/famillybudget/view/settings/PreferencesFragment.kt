@@ -95,15 +95,15 @@ class PreferencesFragment : PreferenceFragmentCompat() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        /*
-         * Rating button
-         */
-        findPreference<Preference>(resources.getString(R.string.setting_category_rate_button_key))?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            activity?.let { activity ->
-                RatingPopup(activity, parameters).show(true)
-            }
-            false
-        }
+//        /*
+//         * Rating button
+//         */
+//        findPreference<Preference>(resources.getString(R.string.setting_category_rate_button_key))?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+//            activity?.let { activity ->
+//                RatingPopup(activity, parameters).show(true)
+//            }
+//            false
+//        }
 
         /*
          * Start day of week
@@ -115,67 +115,67 @@ class PreferencesFragment : PreferenceFragmentCompat() {
             true
         }
 
-        /*
-         * Backup
-         */
-        findPreference<Preference>(getString(R.string.setting_category_backup))?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            startActivity(Intent(context, BackupSettingsActivity::class.java))
-            false
-        }
-        updateBackupPreferences()
+//        /*
+//         * Backup
+//         */
+//        findPreference<Preference>(getString(R.string.setting_category_backup))?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+//            startActivity(Intent(context, BackupSettingsActivity::class.java))
+//            false
+//        }
+//        updateBackupPreferences()
 
-        /*
-         * Bind bug report button
-         */
-        findPreference<Preference>(resources.getString(R.string.setting_category_bug_report_send_button_key))?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            val localId = parameters.getLocalId()
-
-            val sendIntent = Intent()
-            sendIntent.action = Intent.ACTION_SENDTO
-            sendIntent.data = Uri.parse("mailto:") // only email apps should handle this
-            sendIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(resources.getString(R.string.bug_report_email)))
-            sendIntent.putExtra(Intent.EXTRA_TEXT, resources.getString(R.string.setting_category_bug_report_send_text, localId))
-            sendIntent.putExtra(Intent.EXTRA_SUBJECT, resources.getString(R.string.setting_category_bug_report_send_subject))
-
-            val packageManager = activity?.packageManager
-            if (packageManager != null && sendIntent.resolveActivity(packageManager) != null) {
-                startActivity(sendIntent)
-            } else {
-                Toast.makeText(activity, resources.getString(R.string.setting_category_bug_report_send_error), Toast.LENGTH_SHORT).show()
-            }
-
-            false
-        }
-
-        /*
-         * Share app
-         */
-        findPreference<Preference>(resources.getString(R.string.setting_category_share_app_key))?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            try {
-                val sendIntent = Intent()
-                sendIntent.action = Intent.ACTION_SEND
-                sendIntent.putExtra(Intent.EXTRA_TEXT, resources.getString(R.string.app_invite_message) + "\n" + "https://play.google.com/store/apps/details?id=com.jonathan.usehover.famillybudget")
-                sendIntent.type = "text/plain"
-                startActivity(sendIntent)
-            } catch (e: Exception) {
-                Logger.error("An error occurred during sharing app activity start", e)
-            }
-
-            false
-        }
-
-        /*
-         * App version
-         */
-        val appVersionPreference = findPreference<Preference>(resources.getString(R.string.setting_category_app_version_key))
-        appVersionPreference?.title = resources.getString(R.string.setting_category_app_version_title, BuildConfig.VERSION_NAME)
-        appVersionPreference?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            val i = Intent(Intent.ACTION_VIEW)
-            i.data = Uri.parse("https://twitter.com/BenoitLetondor")
-            activity?.startActivity(i)
-
-            false
-        }
+//        /*
+//         * Bind bug report button
+//         */
+//        findPreference<Preference>(resources.getString(R.string.setting_category_bug_report_send_button_key))?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+//            val localId = parameters.getLocalId()
+//
+//            val sendIntent = Intent()
+//            sendIntent.action = Intent.ACTION_SENDTO
+//            sendIntent.data = Uri.parse("mailto:") // only email apps should handle this
+//            sendIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(resources.getString(R.string.bug_report_email)))
+//            sendIntent.putExtra(Intent.EXTRA_TEXT, resources.getString(R.string.setting_category_bug_report_send_text, localId))
+//            sendIntent.putExtra(Intent.EXTRA_SUBJECT, resources.getString(R.string.setting_category_bug_report_send_subject))
+//
+//            val packageManager = activity?.packageManager
+//            if (packageManager != null && sendIntent.resolveActivity(packageManager) != null) {
+//                startActivity(sendIntent)
+//            } else {
+//                Toast.makeText(activity, resources.getString(R.string.setting_category_bug_report_send_error), Toast.LENGTH_SHORT).show()
+//            }
+//
+//            false
+//        }
+//
+//        /*
+//         * Share app
+//         */
+//        findPreference<Preference>(resources.getString(R.string.setting_category_share_app_key))?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+//            try {
+//                val sendIntent = Intent()
+//                sendIntent.action = Intent.ACTION_SEND
+//                sendIntent.putExtra(Intent.EXTRA_TEXT, resources.getString(R.string.app_invite_message) + "\n" + "https://play.google.com/store/apps/details?id=com.jonathan.usehover.famillybudget")
+//                sendIntent.type = "text/plain"
+//                startActivity(sendIntent)
+//            } catch (e: Exception) {
+//                Logger.error("An error occurred during sharing app activity start", e)
+//            }
+//
+//            false
+//        }
+//
+//        /*
+//         * App version
+//         */
+//        val appVersionPreference = findPreference<Preference>(resources.getString(R.string.setting_category_app_version_key))
+//        appVersionPreference?.title = resources.getString(R.string.setting_category_app_version_title, BuildConfig.VERSION_NAME)
+//        appVersionPreference?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+//            val i = Intent(Intent.ACTION_VIEW)
+//            i.data = Uri.parse("https://twitter.com/BenoitLetondor")
+//            activity?.startActivity(i)
+//
+//            false
+//        }
 
         /*
          * Currency change button
@@ -250,58 +250,58 @@ class PreferencesFragment : PreferenceFragmentCompat() {
             setLimitWarningPreferenceTitle(limitWarningPreference)
         }
 
-        /*
-         * Premium status
-         */
-        premiumCategory = findPreference(resources.getString(R.string.setting_category_premium_key))!!
-        notPremiumCategory = findPreference(resources.getString(R.string.setting_category_not_premium_key))!!
-        refreshPremiumPreference()
-
-        /*
-         * Notifications
-         */
-        val updateNotifPref = findPreference<CheckBoxPreference>(resources.getString(R.string.setting_category_notifications_update_key))
-        updateNotifPref?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            parameters.setUserAllowUpdatePushes((it as CheckBoxPreference).isChecked)
-            true
-        }
-        updateNotifPref?.isChecked = parameters.isUserAllowingUpdatePushes()
-
-        /*
-         * Hide dev preferences if needed
-         */
-        val devCategory = findPreference<PreferenceCategory>(resources.getString(R.string.setting_category_dev_key))
-        if (!BuildConfig.DEV_PREFERENCES) {
-            preferenceScreen.removePreference(devCategory)
-        } else {
-            /*
-             * Show welcome screen button
-             */
-            findPreference<Preference>(resources.getString(R.string.setting_category_show_welcome_screen_button_key))?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                context?.let { context ->
-                    LocalBroadcastManager.getInstance(context).sendBroadcast(Intent(MainActivity.INTENT_SHOW_WELCOME_SCREEN))
-                }
-
-                activity?.finish()
-                false
-            }
-
-            /*
-             * Show premium screen
-             */
-            findPreference<Preference>(resources.getString(R.string.setting_category_dev_show_premium_key))?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                showBecomePremiumDialog()
-                false
-            }
-
-            /*
-             * Show backup notif
-             */
-            findPreference<Preference>(getString(R.string.setting_category_dev_show_backup_notif_key))?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                BackupNotif.showBackupNotif(context!!)
-                false
-            }
-        }
+//        /*
+//         * Premium status
+//         */
+//        premiumCategory = findPreference(resources.getString(R.string.setting_category_premium_key))!!
+//        notPremiumCategory = findPreference(resources.getString(R.string.setting_category_not_premium_key))!!
+//        refreshPremiumPreference()
+//
+//        /*
+//         * Notifications
+//         */
+//        val updateNotifPref = findPreference<CheckBoxPreference>(resources.getString(R.string.setting_category_notifications_update_key))
+//        updateNotifPref?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+//            parameters.setUserAllowUpdatePushes((it as CheckBoxPreference).isChecked)
+//            true
+//        }
+//        updateNotifPref?.isChecked = parameters.isUserAllowingUpdatePushes()
+//
+//        /*
+//         * Hide dev preferences if needed
+//         */
+//        val devCategory = findPreference<PreferenceCategory>(resources.getString(R.string.setting_category_dev_key))
+//        if (!BuildConfig.DEV_PREFERENCES) {
+//            preferenceScreen.removePreference(devCategory)
+//        } else {
+//            /*
+//             * Show welcome screen button
+//             */
+//            findPreference<Preference>(resources.getString(R.string.setting_category_show_welcome_screen_button_key))?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+//                context?.let { context ->
+//                    LocalBroadcastManager.getInstance(context).sendBroadcast(Intent(MainActivity.INTENT_SHOW_WELCOME_SCREEN))
+//                }
+//
+//                activity?.finish()
+//                false
+//            }
+//
+//            /*
+//             * Show premium screen
+//             */
+//            findPreference<Preference>(resources.getString(R.string.setting_category_dev_show_premium_key))?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+//                showBecomePremiumDialog()
+//                false
+//            }
+//
+//            /*
+//             * Show backup notif
+//             */
+//            findPreference<Preference>(getString(R.string.setting_category_dev_show_backup_notif_key))?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+//                BackupNotif.showBackupNotif(context!!)
+//                false
+//            }
+//        }
 
         /*
          * Broadcast receiver
